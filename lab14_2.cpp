@@ -3,11 +3,41 @@ using namespace std;
 
 const int N = 5;
 
-void inputMatrix(double [][N]);
+void inputMatrix(double A[][N]){
+	for(int i = 0;i < N;i++){
+		cout << "Row " << i+1 << ": ";
+		for(int j = 0;j < N;j++){
+			cin >> A[i][j];
+		}
+	}
+}
 
-void findLocalMax(const double [][N], bool [][N]);
+void findLocalMax(const double A[][N], bool B[][N]){
+	for(int i = 0; i < N; i++){
+		for(int j = 0; j < N; j++){
+			if(i == 0 || i == N-1 || j == 0 || j == N-1){
+				B[i][j] = false;
+			}
+			else{
+				B[i][j] =
+					(A[i][j] >= A[i-1][j]) &&
+					(A[i][j] >= A[i+1][j]) &&
+					(A[i][j] >= A[i][j-1]) &&
+					(A[i][j] >= A[i][j+1]);
+			}
+		}
+	}
+}
 
-void showMatrix(const bool [][N]);
+void showMatrix(const bool B[][N]){
+	for(int i = 0;i < N;i++){
+		for(int j = 0;j < N;j++){
+			cout << B[i][j];
+			if(j < N-1) cout << " ";
+		}
+		cout << endl;
+	}
+}
 
 int main(){
 	double A[N][N]; 
@@ -20,4 +50,4 @@ int main(){
 	return 0;
 }
 
-//Do not modify source code above this line 
+//Do not modify source code above this line
